@@ -1,29 +1,35 @@
 {
-  "name": "HiroKata ",
+  "name": "HiroKata Claude Code Plugin Marketplace",
   "owner": {
     "name": "Gian Patrick Quintana",
     "email": "gian.quintana@hirokata.dev"
   },
+  "description": "A curated collection of Claude Code plugins for enhanced development workflows",
+  "license": "MIT",
   "plugins": [
     {
       "name": "develop",
       "source": "./plugins/cc-develop-plugin",
       "version": "0.1.0",
-      "description": "A requirements to implementation workflow for software development projects with a breakdown of implementation into phases.",
+      "description": "Requirements-to-implementation workflow with 7-phase clean architecture, automated planning, and adaptive parallel execution.",
       "author": {
         "name": "Gian Patrick Quintana",
         "email": "gian.quintana@hirokata.dev"
-      }
+      },
+      "license": "MIT",
+      "keywords": ["development", "requirements", "automation", "clean-architecture", "planning"]
     },
     {
       "name": "tracker",
       "source": "./plugins/cc-tracker-plugin",
-      "description": "A structured task tracking system with phases, tracks, and detailed progress reporting.",
       "version": "0.1.0",
+      "description": "A structured task tracking system with phases, tracks, and detailed progress reporting.",
       "author": {
         "name": "Gian Patrick Quintana",
         "email": "gian.quintana@hirokata.dev"
-      }
+      },
+      "license": "MIT",
+      "keywords": ["task-management", "project-tracking", "phases", "progress"]
     }
   ]
 }

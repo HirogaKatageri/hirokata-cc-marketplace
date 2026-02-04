@@ -11,6 +11,8 @@ An intelligent assistant that orchestrates all tracker skills to provide convers
 - Progress analysis and insights
 - Proactive recommendations
 
+**Agent:** `tracker:tracker`
+
 **Usage**: Simply ask for help with your project management needs:
 ```
 "Help me set up tracking for my new web app"
@@ -22,9 +24,9 @@ See [agents/tracker/README.md](agents/tracker/README.md) for detailed agent docu
 
 ### Tracker Skills 🛠️
 Individual skills for specific tracker operations. Use these when you need direct control:
-- `/create-tracker` - Create new trackers
-- `/add-task` - Add tasks to trackers
-- `/review-tracker` - Generate progress reports
+- `/tracker:create-tracker` - Create new trackers
+- `/tracker:add-task` - Add tasks to trackers
+- `/tracker:review-tracker` - Generate progress reports
 - And more...
 
 ## Overview
@@ -74,25 +76,25 @@ If you prefer command-line style control, use individual skills directly.
 - 🔧 You prefer **command-line control**
 - ⏱️ You want **quick, direct execution**
 
-**Example**: `/add-task my-app --phase=1 --track=auth --priority=high` - Direct task creation with no conversation.
+**Example**: `/tracker:add-task my-app --phase=1 --track=auth --priority=high` - Direct task creation with no conversation.
 
 ---
 
 ## Available Skills
 
-### 1. `/create-tracker` - Create a New Tracker
+### 1. `/tracker:create-tracker` - Create a New Tracker
 
 Creates a new task tracker with initial phases and tracks.
 
 **Usage**:
 ```bash
-/create-tracker [tracker-name]
+/tracker:create-tracker [tracker-name]
 ```
 
 **Examples**:
 ```bash
-/create-tracker my-app
-/create-tracker e-commerce-platform
+/tracker:create-tracker my-app
+/tracker:create-tracker e-commerce-platform
 ```
 
 **What it does**:
@@ -103,13 +105,13 @@ Creates a new task tracker with initial phases and tracks.
 
 ---
 
-### 2. `/add-task` - Add Task to Tracker
+### 2. `/tracker:add-task` - Add Task to Tracker
 
 Adds a new task to an existing tracker with metadata and optional plan file.
 
 **Usage**:
 ```bash
-/add-task [tracker-name] [options]
+/tracker:add-task [tracker-name] [options]
 ```
 
 **Options**:
@@ -120,9 +122,9 @@ Adds a new task to an existing tracker with metadata and optional plan file.
 
 **Examples**:
 ```bash
-/add-task my-app
-/add-task my-app --phase=2 --track=authentication
-/add-task my-app --phase=1 --priority=high
+/tracker:add-task my-app
+/tracker:add-task my-app --phase=2 --track=authentication
+/tracker:add-task my-app --phase=1 --priority=high
 ```
 
 **What it does**:
@@ -134,22 +136,22 @@ Adds a new task to an existing tracker with metadata and optional plan file.
 
 ---
 
-### 3. `/mark-status` - Quick Status Updates
+### 3. `/tracker:mark-status` - Quick Status Updates
 
 Quickly updates task status with automatic timestamp tracking.
 
 **Usage**:
 ```bash
-/mark-status [tracker-name]
+/tracker:mark-status [tracker-name]
 ```
 
 **Examples**:
 ```bash
-/mark-status my-app
+/tracker:mark-status my-app
 > Select task: 03
 > New status: complete
 
-/mark-status my-app
+/tracker:mark-status my-app
 > Select task: 05
 > New status: blocked
 ```
@@ -161,17 +163,17 @@ Quickly updates task status with automatic timestamp tracking.
 - Statistics recalculation
 - Phase and track progress updates
 
-**For comprehensive task editing** (priority, complexity, description, etc.), use `/edit-task` instead.
+**For comprehensive task editing** (priority, complexity, description, etc.), use `/tracker:edit-task` instead.
 
 ---
 
-### 4. `/review-tracker` - Review Progress
+### 4. `/tracker:review-tracker` - Review Progress
 
 Reviews tracker progress and generates comprehensive status reports.
 
 **Usage**:
 ```bash
-/review-tracker [tracker-name] [options]
+/tracker:review-tracker [tracker-name] [options]
 ```
 
 **Options**:
@@ -183,11 +185,11 @@ Reviews tracker progress and generates comprehensive status reports.
 
 **Examples**:
 ```bash
-/review-tracker my-app
-/review-tracker my-app --detailed
-/review-tracker my-app --status=blocked
-/review-tracker my-app --phase=2
-/review-tracker my-app --detailed --export
+/tracker:review-tracker my-app
+/tracker:review-tracker my-app --detailed
+/tracker:review-tracker my-app --status=blocked
+/tracker:review-tracker my-app --phase=2
+/tracker:review-tracker my-app --detailed --export
 ```
 
 **What it shows**:
@@ -198,6 +200,35 @@ Reviews tracker progress and generates comprehensive status reports.
 - Blocked tasks and dependencies
 - Next actions and recommendations
 - Visual progress bars
+
+---
+
+### Additional Skills
+
+The plugin includes additional skills for advanced tracker management:
+
+#### Phase Management
+- `/tracker:add-phase` - Add a new phase to an existing tracker
+- `/tracker:edit-phase` - Edit phase details (name, status, dates)
+- `/tracker:remove-phase` - Remove a phase from the tracker
+
+#### Track Management
+- `/tracker:add-track` - Add a new feature track to the tracker
+- `/tracker:edit-track` - Edit track details (name, description)
+- `/tracker:remove-track` - Remove a track from the tracker
+
+#### Task Management
+- `/tracker:edit-task` - Edit task details (title, description, priority, complexity, dependencies)
+- `/tracker:remove-task` - Remove a task from the tracker
+
+#### Tracker Management
+- `/tracker:edit-tracker` - Edit tracker metadata (name, description, status)
+
+These skills provide fine-grained control over tracker structure and are useful for:
+- Adapting to changing project requirements
+- Reorganizing work breakdown structures
+- Cleaning up completed or cancelled work
+- Adjusting priorities and dependencies
 
 ---
 
@@ -256,48 +287,48 @@ Organized by phase and track, each task includes:
 
 ### 1. Create New Tracker
 ```bash
-/create-tracker my-app
+/tracker:create-tracker my-app
 > Phases: 3 (Planning, Implementation, Testing)
 > Tracks: authentication, dashboard
 ```
 
 ### 2. Add Tasks
 ```bash
-/add-task my-app --phase=1 --track=authentication
+/tracker:add-task my-app --phase=1 --track=authentication
 > Title: "Setup authentication framework"
 > Priority: High
 > Complexity: Medium
 
-/add-task my-app --phase=1 --track=dashboard
+/tracker:add-task my-app --phase=1 --track=dashboard
 > Title: "Create dashboard layout"
 > Priority: Medium
 ```
 
 ### 3. Work on Tasks
 ```bash
-/mark-status my-app
+/tracker:mark-status my-app
 > Task 01 → In Progress
 # ... do work ...
-/mark-status my-app
+/tracker:mark-status my-app
 > Task 01 → Complete
 ```
 
 ### 4. Review Progress
 ```bash
-/review-tracker my-app
+/tracker:review-tracker my-app
 > Shows: 1/2 tasks complete (50%)
 > Recommends: Start Task 02
 ```
 
 ### 5. Continue Through Phases
 ```bash
-/add-task my-app --phase=2 --track=authentication
+/tracker:add-task my-app --phase=2 --track=authentication
 > Title: "Implement login API"
 > Blocked by: 01
 
-/edit-phase my-app
+/tracker:edit-phase my-app
 > Phase 1 → Status: Complete
-/review-tracker my-app --phase=2
+/tracker:review-tracker my-app --phase=2
 ```
 
 ## Status Values
@@ -332,18 +363,19 @@ Organized by phase and track, each task includes:
 7. **Create plan files** for complex tasks needing detailed planning
 8. **Export reports** for meetings and retrospectives
 
-## Integration with Other Skills
+## Integration with Other Plugins
 
-### With /build Skill
-The /build skill creates similar phase-based plans. You can:
-1. Create tracker for overall project structure
-2. Use /build for detailed implementation within phases
-3. Update tracker as build phases complete
+### With develop Plugin
+The develop plugin integrates automatically with the tracker system:
+1. Use `/develop:develop-project` to create trackers and implement features
+2. The plugin automatically organizes work into phases and tracks
+3. Progress updates happen in real-time as implementation proceeds
 
-### With /git-worktree Skill
-When working on multiple tracks:
-1. Create worktrees for different feature tracks
-2. Update tracker tasks as you complete work in each worktree
+### With git-worktree
+When working on multiple feature tracks:
+1. Create git worktrees for different feature tracks
+2. Use `/tracker:mark-status` to update task status as you complete work in each worktree
+3. Keep your tracker synchronized with your branching strategy
 
 ## Examples
 
@@ -405,7 +437,7 @@ A: Yes, manually edit the TRACKER.md file to move the task section to the correc
 A: Manually edit the TRACKER.md file to add the new phase section.
 
 **Q: How do I delete a task?**
-A: Use `/mark-status` to set status to "Cancelled", use `/remove-task` to delete it completely, or manually edit TRACKER.md.
+A: Use `/tracker:mark-status` to set status to "Cancelled", use `/tracker:remove-task` to delete it completely, or manually edit TRACKER.md.
 
 **Q: Can tasks have sub-tasks?**
 A: No, the tracker format keeps tasks flat for simplicity. Break complex tasks into multiple tasks instead.
@@ -450,6 +482,25 @@ The agent uses skills internally, but you can also use skills directly.
 - **Agent Documentation**: [agents/tracker/README.md](agents/tracker/README.md) - Comprehensive agent guide
 - **Plugin Overview**: This file (README.md) - Quick reference for all features
 - **Skill Documentation**: Each skill has a `SKILL.md` file with detailed instructions
+
+## Contributing
+
+Contributions are welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test with Claude Code
+5. Submit a pull request
+
+## License
+
+MIT License - See LICENSE file for details.
+
+## Author
+
+**Gian Patrick Quintana**
+- Email: gian.quintana@hirokata.dev
+- GitHub: [@hirogakatageri](https://github.com/hirogakatageri)
 
 ## Support
 

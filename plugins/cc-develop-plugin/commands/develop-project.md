@@ -19,15 +19,15 @@ arguments:
     required: false
     flag: true
 examples:
-  - "/develop-project requirements.md"
-  - "/develop-project app-requirements --sequential"
-  - "/develop-project requirements.md --max-parallel=4"
-  - "/develop-project requirements.md --aggressive"
+  - "/develop:develop-project requirements.md"
+  - "/develop:develop-project app-requirements --sequential"
+  - "/develop:develop-project requirements.md --max-parallel=4"
+  - "/develop:develop-project requirements.md --aggressive"
 ---
 
 # Develop Project Workflow Command
 
-You are automating a complete requirements-to-implementation workflow with a structured phase-based architecture. This command takes a requirements document, creates a master plan using a planning agent, analyzes the master plan with a split-plan skill to organize tasks into phases and tracks, creates implementation plans, executes those plans, and tracks progress using the tracker agent.
+You are automating a complete requirements-to-implementation workflow with a structured phase-based architecture. This command takes a requirements document, creates a master plan using a planning agent, analyzes the master plan with the `develop:split-plan` skill to organize tasks into phases and tracks, creates implementation plans, executes those plans, and tracks progress using the `tracker:tracker` agent.
 
 ## Your Task
 
@@ -35,8 +35,8 @@ Process a requirements document through this 8-step workflow:
 1. **Parse arguments** and resolve requirements file path
 2. **Plan agent** creates a comprehensive master plan
 3. **User reviews** and approves the master plan
-4. **develop:development-planner agent** analyzes master plan using split-plan skill and organizes tasks into **predefined phases** (Foundational → Models → Services → Data → Rules → State Management → UI) and **feature-based tracks** (authentication, profile, products, etc.)
-5. **Tracker agent** creates and populates tracker from phase plans
+4. **develop:development-planner agent** analyzes master plan using `develop:split-plan` skill and organizes tasks into **predefined phases** (Foundational → Models → Services → Data → Rules → State Management → UI) and **feature-based tracks** (authentication, profile, products, etc.)
+5. **tracker:tracker agent** creates and populates tracker from phase plans
 6. **Present analysis and select phases** - user reviews structure and chooses which phases to execute
 7. **develop:senior-developer agents** execute selected phases adaptively based on task complexity
 8. **Generate final summary report** with progress and next steps
@@ -368,7 +368,7 @@ This gives users real-time visibility into workflow progress.
 
 **After completing Step 3**: Use **TaskUpdate** to set Task 3 status to `completed`
 
-**IMPORTANT**: This step ensures user has reviewed and approved the master plan before the split-plan skill organizes it into phases.
+**IMPORTANT**: This step ensures user has reviewed and approved the master plan before the develop:split-plan skill organizes it into phases.
 
 ### Step 4: Split Master Plan into Phase Plans
 
@@ -392,7 +392,7 @@ This gives users real-time visibility into workflow progress.
 
      ## Your Task
 
-     Use the split-plan skill to:
+     Use the develop:split-plan skill to:
      1. Read and analyze the entire master plan
      2. Identify feature tracks that span multiple phases
      3. Map tasks to appropriate phases using phase classification
@@ -401,11 +401,11 @@ This gives users real-time visibility into workflow progress.
      6. Verify all files were created successfully
      7. Report completion status with statistics
 
-     Execute the split-plan skill with:
+     Execute the develop:split-plan skill with:
      - master-plan-path: .trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md
      - base-name: {BASE_NAME}
 
-     After the split-plan skill completes, provide a comprehensive summary of:
+     After the develop:split-plan skill completes, provide a comprehensive summary of:
      - All 7 phase plan files created
      - Feature tracks identified
      - Task distribution across phases
@@ -416,7 +416,7 @@ This gives users real-time visibility into workflow progress.
    ```
 
 2. Wait for the develop:development-planner agent to complete. The agent will:
-   - Use the split-plan skill to analyze the master plan
+   - Use the develop:split-plan skill to analyze the master plan
    - Generate all 7 phase plan files in `.trackers/{BASE_NAME}/plans/`
    - Identify feature tracks and classify tasks by phase
    - Score task complexity (1-3)
@@ -1013,14 +1013,14 @@ After all implementations complete (or when user chooses to pause):
 - **Master Plan First**: Planning agent creates comprehensive master plan from requirements
 - **Master Plan Review**: User reviews and approves master plan before split-plan workflow
 - **Development Planner Agent**: Step 4 uses develop:development-planner agent to analyze master plan and create phase plans
-- **Split Plan Analysis**: develop:development-planner agent uses split-plan skill to organize master plan into 7 phases
+- **Split Plan Analysis**: develop:development-planner agent uses develop:split-plan skill to organize master plan into 7 phases
 - **Separate Tracker Creation**: Step 5 creates tracker and populates it from phase plans using ONLY tracker skills
 - **Fixed Phase Architecture**: Always use the 7 predefined phases in order
 - **Feature-Based Tracks**: Tracks represent features, not arbitrary groupings
 - **Tracker Integration**: All task management goes through tracker agent skills
 - **Plan Files**: Master plan + 7 phase-specific plans + summary (generated at end)
 - **Terminal Visibility**: Both workflow tasks and tracker updates visible throughout
-- **Complexity Scoring**: split-plan skill adds complexity scores to all tasks
+- **Complexity Scoring**: develop:split-plan skill adds complexity scores to all tasks
 - **User Confirmation**: Required at multiple checkpoints:
   - After master plan creation (Step 3)
   - After phase plans creation (Step 4)

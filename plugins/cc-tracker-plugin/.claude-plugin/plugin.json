@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "A structured task tracking system with phases, tracks, and detailed progress reporting.",
   "author": {
-    "name": "hirogakatageri"
+    "name": "Gian Patrick Quintana",
+    "email": "gian.quintana@hirokata.dev"
   },
+  "license": "MIT",
   "keywords": ["task-management", "project-tracking", "phases", "progress"]
 }

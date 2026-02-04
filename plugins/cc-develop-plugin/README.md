@@ -52,19 +52,19 @@ Within each phase, tasks are organized by track. For example, Phase 2 (Models) m
 - Track: products (Product model, Category model)
 - Track: cart (CartItem model)
 
-## Skills
+## Commands
 
-### `/develop:start`
+### `/develop:develop-project`
 
-Start a new requirements-to-implementation workflow.
+Complete requirements-to-implementation workflow with 7-phase architecture.
 
 **Usage:**
 ```
-/develop:start <requirements-file> [options]
+/develop:develop-project [file-path-or-query] [options]
 ```
 
 **Arguments:**
-- `<requirements-file>` - Path to requirements document (markdown) or search query
+- `[file-path-or-query]` - Path to requirements document (markdown) or search query (optional)
 - `--max-parallel=N` - Override max parallel agents (1-8, default: adaptive)
 - `--sequential` - Force sequential execution (1 agent at a time)
 - `--aggressive` - Increase parallelism (1.5x multiplier)
@@ -72,36 +72,37 @@ Start a new requirements-to-implementation workflow.
 **Examples:**
 ```bash
 # Start with requirements file
-/develop:start requirements.md
+/develop:develop-project requirements.md
 
 # Search for requirements file
-/develop:start app-requirements
+/develop:develop-project app-requirements
 
 # Start with custom parallelism
-/develop:start requirements.md --max-parallel=4
+/develop:develop-project requirements.md --max-parallel=4
 
 # Start in sequential mode
-/develop:start requirements.md --sequential
+/develop:develop-project requirements.md --sequential
 
 # Start in aggressive mode (more parallel agents)
-/develop:start requirements.md --aggressive
+/develop:develop-project requirements.md --aggressive
 ```
 
 **Workflow:**
 
-1. **Plan Agent** creates comprehensive master plan from requirements
-2. **User Reviews** and approves the master plan
-3. **Phase-Architect Agent** analyzes master plan and organizes tasks into:
+1. **Parse arguments** and resolve requirements file path
+2. **Plan Agent** creates comprehensive master plan from requirements
+3. **User Reviews** and approves the master plan
+4. **develop:development-planner Agent** analyzes master plan using `develop:split-plan` skill and organizes tasks into:
    - 7 sequential phases (Foundational → Models → Services → Data → Rules → State Management → UI)
    - Feature-based tracks (authentication, products, etc.)
    - Complexity scores for each task (1-3)
-4. **Tracker Agent** initializes progress tracking
-5. **User Confirms** phase/track structure
-6. **Senior-Developer Agents** execute implementation:
+5. **tracker:tracker Agent** creates and populates tracker from phase plans
+6. **Present analysis and select phases** - user reviews structure and chooses which phases to execute
+7. **develop:senior-developer Agents** execute selected phases adaptively based on task complexity:
    - Phases run sequentially (1→2→3→4→5→6→7)
    - Within each phase, 1-8 agents run in parallel based on task complexity
    - Tracker updates in real-time
-7. **Summary Report** generated on completion
+8. **Generate final summary report** with progress and next steps
 
 **Files Generated:**
 ```
@@ -120,64 +121,51 @@ Start a new requirements-to-implementation workflow.
     └── {BASE_NAME}-SUMMARY.md             # Summary report
 ```
 
-### `/develop:resume`
+## Skills
 
-Resume implementation from an existing tracker.
+The plugin includes internal skills used by agents (not directly invokable by users):
 
-**Usage:**
-```
-/develop:resume <tracker-name> [options]
-```
+### `develop:split-plan`
 
-**Arguments:**
-- `<tracker-name>` - Name of existing tracker (BASE_NAME)
-- `--max-parallel=N` - Override max parallel agents (1-8, default: adaptive)
-- `--sequential` - Force sequential execution (1 agent at a time)
-- `--aggressive` - Increase parallelism (1.5x multiplier)
+Analyzes a master plan file and splits it into 7 phase-specific implementation plans organized by feature tracks.
 
-**Examples:**
-```bash
-# Resume from tracker
-/develop:resume app-v1
+**Responsibilities:**
+- Automatically identifies feature tracks
+- Classifies tasks by phase
+- Scores task complexity (1-3)
+- Generates detailed phase plan files following clean architecture principles
 
-# Resume with custom parallelism
-/develop:resume app-v1 --max-parallel=4
+### `develop:estimate-task`
 
-# Resume in sequential mode
-/develop:resume app-v1 --sequential
-```
+Provides task estimation based on complexity scoring.
 
-**Workflow:**
+### `develop:categorize-task`
 
-1. **Reads tracker** state to identify incomplete work
-2. **Presents status** to user (completed, pending, blocked tasks)
-3. **User selects** which phases to resume
-4. **Senior-Developer Agents** continue implementation from incomplete phases
-5. **Tracker updates** in real-time
-6. **Progress report** generated on completion or pause
+Categorizes tasks into appropriate phases and tracks
 
 ## Agents
 
-### `phase-architect`
+### `develop:development-planner`
 
-Analyzes master plans and organizes tasks into the 7-phase architecture with feature tracks.
+Analyzes master plans and organizes tasks into the 7-phase architecture with feature tracks using the `develop:split-plan` skill.
 
 **Responsibilities:**
 - Parse master plan files
 - Identify feature tracks (authentication, products, etc.)
-- Map tasks to appropriate phases
+- Map tasks to appropriate phases using `develop:split-plan` skill
 - Create phase-specific plan files (01-07)
 - Add complexity scores to tasks (1-3)
 - Generate dependency analysis
-- Create summary reports
+- Create tracker structure
+- Present analysis for user review
 
 **Color:** Purple
 
 **Triggers:**
-- Called by `/develop:start` skill after master plan creation
-- Can be invoked manually to re-analyze a master plan
+- Called by `/develop:develop-project` command after master plan creation
+- Can be invoked manually to analyze and split master plans
 
-### `senior-developer`
+### `develop:senior-developer`
 
 Implements features and writes production-ready code following project patterns.
 
@@ -188,12 +176,13 @@ Implements features and writes production-ready code following project patterns.
 - Write clean, maintainable code
 - Handle errors appropriately
 - Integrate with existing code
+- Update tracker status as tasks complete
 
 **Color:** Blue
 
 **Triggers:**
-- Spawned by `/develop:start` and `/develop:resume` skills
-- 1-8 agents run in parallel per phase based on complexity
+- Spawned by `/develop:develop-project` command during phase execution
+- 1-8 agents run in parallel per phase based on task complexity
 - Can be invoked manually for specific implementation tasks
 
 ## Complexity Scoring
@@ -262,37 +251,40 @@ BASE_PARALLEL = floor(10.0 / AVG_COMPLEXITY)
 
 ```bash
 # 1. Start with requirements
-/develop:start requirements/my-app.md
+/develop:develop-project requirements/my-app.md
 
 # The plugin will:
 # - Create master plan using Plan agent
 # - Wait for your review and approval
-# - Analyze with phase-architect agent
+# - Analyze with develop:development-planner agent using develop:split-plan skill
 # - Show you the phase/track structure
-# - Ask for confirmation
-# - Begin implementation phase by phase
+# - Ask for phase selection
+# - Begin implementation phase by phase with develop:senior-developer agents
 
 # 2. Monitor progress
 # Tracker updates show in terminal as work progresses
 
-# 3. If interrupted, resume later
-/develop:resume my-app
+# 3. View tracker status anytime
+/tracker:review-tracker my-app
 
-# 4. Continue from incomplete phases
-# Select which phases to resume
+# 4. If needed, rerun with different parallelism
+/develop:develop-project requirements/my-app.md --max-parallel=2
 ```
 
 ### Starting with Options
 
 ```bash
 # Conservative approach (sequential)
-/develop:start requirements.md --sequential
+/develop:develop-project requirements.md --sequential
 
 # Aggressive approach (more parallelism)
-/develop:start requirements.md --aggressive
+/develop:develop-project requirements.md --aggressive
 
 # Controlled parallelism
-/develop:start requirements.md --max-parallel=3
+/develop:develop-project requirements.md --max-parallel=3
+
+# Interactive mode (prompts for file)
+/develop:develop-project
 ```
 
 ## Installation
@@ -379,16 +371,19 @@ Always review the master plan and phase structure before execution:
 ```
 cc-develop-plugin/
 ├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest
+│   └── plugin.json              # Plugin manifest
 ├── agents/
-│   ├── phase-architect.md   # Phase architect agent
-│   └── senior-developer.md  # Senior developer agent
+│   ├── development-planner.md   # Development planner agent
+│   └── senior-developer.md      # Senior developer agent
 ├── commands/
-│   ├── start.md            # Start command
-│   └── resume.md           # Resume command
+│   └── develop-project.md       # Main workflow command
+├── skills/
+│   ├── split-plan/              # Split master plan into phases
+│   ├── estimate-task/           # Task estimation
+│   └── categorize-task/         # Task categorization
 ├── .gitignore
-├── LICENSE                  # MIT License
-└── README.md               # This file
+├── LICENSE                      # MIT License
+└── README.md                   # This file
 ```
 
 ## Contributing
@@ -397,16 +392,18 @@ Contributions are welcome! Please:
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Submit a pull request
+4. Test with Claude Code
+5. Submit a pull request
 
 ## License
 
-MIT License - See LICENSE file for details
+MIT License - See LICENSE file for details.
 
 ## Author
 
-**hirogakatageri**
+**Gian Patrick Quintana**
 - Email: gian.quintana@hirokata.dev
+- GitHub: [@hirogakatageri](https://github.com/hirogakatageri)
 
 ## Support
 
