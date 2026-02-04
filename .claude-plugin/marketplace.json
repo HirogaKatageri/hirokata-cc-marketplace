@@ -1,0 +1,29 @@
+{
+  "name": "HiroKata ",
+  "owner": {
+    "name": "Gian Patrick Quintana",
+    "email": "gian.quintana@hirokata.dev"
+  },
+  "plugins": [
+    {
+      "name": "develop",
+      "source": "./plugins/cc-develop-plugin",
+      "version": "0.1.0",
+      "description": "A requirements to implementation workflow for software development projects with a breakdown of implementation into phases.",
+      "author": {
+        "name": "Gian Patrick Quintana",
+        "email": "gian.quintana@hirokata.dev"
+      }
+    },
+    {
+      "name": "tracker",
+      "source": "./plugins/cc-tracker-plugin",
+      "description": "A structured task tracking system with phases, tracks, and detailed progress reporting.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Gian Patrick Quintana",
+        "email": "gian.quintana@hirokata.dev"
+      }
+    }
+  ]
+}
