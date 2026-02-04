@@ -1,0 +1,3 @@
+# Python dependencies for hello-world-python
+# This file is currently empty as the project has no external dependencies
+# Add any required packages here in the format: package-name==version
