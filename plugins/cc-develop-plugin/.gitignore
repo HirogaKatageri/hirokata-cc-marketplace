@@ -1,0 +1,5 @@
+# Build workflow output
+.agents/
+
+# OS files
+.DS_Store
