@@ -20,7 +20,7 @@ An intelligent assistant that orchestrates all tracker skills to provide convers
 "Review my project progress and suggest next steps"
 ```
 
-See [agents/tracker/README.md](agents/tracker/README.md) for detailed agent documentation.
+See [agents/tracker.md](agents/tracker.md) for detailed agent documentation.
 
 ### Tracker Skills 🛠️
 Individual skills for specific tracker operations. Use these when you need direct control:
@@ -452,9 +452,7 @@ A: Create separate task entries for each occurrence with unique numbers.
 ```
 cc-tracker-plugin/
 ├── agents/
-│   └── tracker/                 # Tracker Agent
-│       ├── AGENT.md            # Agent system prompt
-│       └── README.md           # Agent documentation
+│   └── tracker.md              # Tracker Agent system prompt
 ├── skills/
 │   ├── create-tracker/         # Create tracker skill
 │   ├── add-task/              # Add task skill
@@ -479,7 +477,7 @@ The agent uses skills internally, but you can also use skills directly.
 
 ## Documentation
 
-- **Agent Documentation**: [agents/tracker/README.md](agents/tracker/README.md) - Comprehensive agent guide
+- **Agent Documentation**: [agents/tracker.md](agents/tracker.md) - Comprehensive agent guide
 - **Plugin Overview**: This file (README.md) - Quick reference for all features
 - **Skill Documentation**: Each skill has a `SKILL.md` file with detailed instructions
 
@@ -505,7 +503,7 @@ MIT License - See LICENSE file for details.
 ## Support
 
 For issues or feature requests:
-- **Agent issues**: See [agents/tracker/README.md](agents/tracker/README.md)
+- **Agent issues**: See [agents/tracker.md](agents/tracker.md)
 - **Skill details**: Refer to individual SKILL.md files in each subdirectory:
   - `skills/create-tracker/SKILL.md`
   - `skills/add-task/SKILL.md`
