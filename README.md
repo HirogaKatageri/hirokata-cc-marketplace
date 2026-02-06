@@ -8,7 +8,7 @@ This marketplace provides production-ready Claude Code plugins that extend Claud
 
 ## Available Plugins
 
-### 1. Tracker Plugin (v0.1.0)
+### 1. Tracker Plugin (v0.1.1)
 
 A comprehensive project and task management system with intelligent agents and structured tracking.
 
@@ -28,7 +28,7 @@ A comprehensive project and task management system with intelligent agents and s
 
 [View Documentation →](plugins/cc-tracker-plugin/README.md)
 
-### 2. Develop Plugin (v0.1.0)
+### 2. Develop Plugin (v0.1.1)
 
 Automated requirements-to-implementation workflow using a 7-phase clean architecture approach.
 
