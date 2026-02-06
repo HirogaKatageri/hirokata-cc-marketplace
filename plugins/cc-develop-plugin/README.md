@@ -137,13 +137,66 @@ Analyzes a master plan file and splits it into 7 phase-specific implementation p
 
 ### `develop:estimate-task`
 
-Provides task estimation based on complexity scoring.
+Reference guide for scoring task complexity using a 3-level system (1=Low, 2=Medium, 3=High).
+
+**Scoring System:**
+- **Score 1 (Low)**: Simple, straightforward tasks (constants, simple models, documentation)
+  - Examples: Add API constant, create basic model, update README
+  - Estimated effort: Minutes to 1-2 hours
+- **Score 2 (Medium)**: Implementation tasks requiring moderate effort (features, services, UI components)
+  - Examples: Implement login service, create form with validation, build state management
+  - Estimated effort: Half-day to 2 days
+- **Score 3 (High)**: Complex architectural tasks (authentication systems, payment integration, real-time features)
+  - Examples: Implement full auth system, integrate payment gateway, set up state framework
+  - Estimated effort: 2+ days
+
+**Used by:** development-planner agent during task complexity analysis
 
 ### `develop:categorize-task`
 
-Categorizes tasks into appropriate phases and tracks
+Reference guide for classifying development tasks into the 7-phase clean architecture structure.
+
+**Classification System:**
+- **Phase 1 (Foundational)**: Infrastructure, utilities, abstract classes, base setup
+- **Phase 2 (Models)**: Entities, DTOs, data structures, value objects
+- **Phase 3 (Services)**: External APIs, third-party integrations, network layer
+- **Phase 4 (Data)**: Repositories, DAOs, data access, local storage
+- **Phase 5 (Rules)**: Business logic, use cases, validation, domain rules
+- **Phase 6 (State Management)**: View models, presenters, state handlers, controllers
+- **Phase 7 (UI)**: Screens, components, views, user interface
+
+**Used by:** development-planner agent during task organization
 
 ## Agents
+
+### `develop:product-owner`
+
+Transforms ambiguous ideas into well-structured requirements, user stories, and clear project scope.
+
+**Responsibilities:**
+- Translate feature requests into structured requirements
+- Create comprehensive user stories with acceptance criteria
+- Identify edge cases, dependencies, and constraints
+- Define success metrics and KPIs
+- Validate requirements against project patterns (CLAUDE.md)
+- Bridge communication between business and technical stakeholders
+- Ensure requirements are testable and complete
+
+**Color:** Pink
+
+**Model:** Haiku (fast, efficient for requirements gathering)
+
+**Tools:** TaskCreate, TaskGet, TaskUpdate, TaskList, Glob, Grep, Read, WebFetch, WebSearch, ListMcpResourcesTool, ReadMcpResourceTool, Edit, Write, NotebookEdit, Bash
+
+**Triggers:**
+- When users describe new features without clear requirements
+- When existing features need improvement or clarification
+- When starting new project phases that need scope definition
+- Can be invoked manually for requirements gathering
+
+**Output Formats:**
+- User Stories (primary): As a [role], I want [action], so that [value]
+- Use Cases (secondary): Detailed workflow documentation for complex scenarios
 
 ### `develop:development-planner`
 
@@ -159,7 +212,13 @@ Analyzes master plans and organizes tasks into the 7-phase architecture with fea
 - Create tracker structure
 - Present analysis for user review
 
-**Color:** Purple
+**Color:** Orange
+
+**Model:** Sonnet (comprehensive analysis and planning)
+
+**Tools:** Read, Write, Edit, Glob, Grep, Bash, Skill, AskUserQuestion
+
+**Skills:** develop:split-plan
 
 **Triggers:**
 - Called by `/develop:develop-project` command after master plan creation
@@ -179,6 +238,10 @@ Implements features and writes production-ready code following project patterns.
 - Update tracker status as tasks complete
 
 **Color:** Blue
+
+**Model:** Sonnet (advanced code generation and reasoning)
+
+**Tools:** TaskCreate, TaskGet, TaskUpdate, TaskList, Glob, Grep, Read, Write, Edit, NotebookEdit, Bash, Skill, AskUserQuestion
 
 **Triggers:**
 - Spawned by `/develop:develop-project` command during phase execution
@@ -373,6 +436,7 @@ cc-develop-plugin/
 ├── .claude-plugin/
 │   └── plugin.json              # Plugin manifest
 ├── agents/
+│   ├── product-owner.md         # Product owner agent (NEW in 0.1.1)
 │   ├── development-planner.md   # Development planner agent
 │   └── senior-developer.md      # Senior developer agent
 ├── commands/
@@ -414,9 +478,18 @@ For issues, questions, or feature requests:
 
 ## Changelog
 
+### 0.1.1
+- **New Agent: product-owner** - Expert requirements engineering agent for translating ideas into structured user stories
+  - Proactive engagement when users describe new features
+  - Comprehensive requirements gathering with edge cases and acceptance criteria
+  - Integration with project context (CLAUDE.md) for pattern alignment
+  - Support for both User Stories and Use Cases formats
+  - Quality gates for testable, measurable requirements
+- Enhanced agent ecosystem with specialized roles (product-owner, development-planner, senior-developer)
+
 ### 0.1.0 (Initial Release)
 - Phase-based requirements-to-implementation workflow
-- Product owner agent for plan analysis
+- Development planner agent for plan analysis and task organization
 - Senior developer agent for implementation
 - Start and resume commands
 - Adaptive parallelism based on complexity

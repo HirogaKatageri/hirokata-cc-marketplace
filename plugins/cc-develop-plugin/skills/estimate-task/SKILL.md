@@ -1,7 +1,7 @@
 ---
 name: estimate-task
 description: Reference guide for scoring task complexity using a 3-level system (1=Low, 2=Medium, 3=High). Use when you need to estimate development effort, plan sprints, or assess task difficulty.
-user-invocable: true
+user-invocable: false
 ---
 
 # Estimate Task

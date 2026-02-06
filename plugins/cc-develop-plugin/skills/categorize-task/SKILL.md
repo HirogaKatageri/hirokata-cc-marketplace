@@ -1,7 +1,7 @@
 ---
 name: categorize-task
 description: Reference guide for classifying development tasks into the 7-phase clean architecture structure (Foundational → Models → Services → Data → Rules → State Management → UI). Use when you need to determine which architectural phase a task belongs to.
-user-invocable: true
+user-invocable: false
 ---
 
 # Categorize Task
