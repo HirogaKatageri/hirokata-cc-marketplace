@@ -1,13 +1,13 @@
 ---
 name: add-task
-description: Add a new task to an existing tracker with phase, track, and metadata
+description: This skill should be used when the user asks to "add a task", "add task to tracker", "create a new task", "add work item", "add a todo to tracker", or wants to add tasks with phase, track, priority, and complexity metadata.
 ---
 
 # Add Task Skill
 
-You are helping the user add a new task to an existing tracker. Tasks are organized by phase and track, with metadata like priority, complexity, and acceptance criteria.
+Add a new task to an existing tracker. Tasks are organized by phase and track, with metadata like priority, complexity, and acceptance criteria.
 
-## Your Task
+## Purpose
 
 Add a new task to an existing tracker, updating both the task list and the tracker's overview statistics.
 

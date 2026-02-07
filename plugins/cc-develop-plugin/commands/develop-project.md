@@ -1,6 +1,13 @@
 ---
 name: develop-project
 description: Full requirements-to-implementation workflow with 7-phase architecture, automated planning, complexity analysis, and adaptive parallel execution
+critical-concepts:
+  - "This command follows an 8-step workflow: Parse Args → Plan → Review → Split Plan → Create Tracker → Select Phases → Execute → Summary"
+  - "Uses fixed 7-phase clean architecture: Foundational → Models → Services → Data → Rules → State Management → UI"
+  - "Phases execute SEQUENTIALLY (in order), tasks within phase execute ADAPTIVELY IN PARALLEL (1-8 agents based on complexity)"
+  - "ALWAYS create 8 workflow tasks at start using TaskCreate for progress visibility"
+  - "User confirmation required at: master plan review, phase plan review, phase selection, after each phase execution"
+  - "Tracker integration: All task management through tracker:tracker agent skills"
 arguments:
   - name: file-path-or-query
     description: Path to requirements markdown file, or search query to find file
@@ -27,9 +34,9 @@ examples:
 
 # Develop Project Workflow Command
 
-You are automating a complete requirements-to-implementation workflow with a structured phase-based architecture. This command takes a requirements document, creates a master plan using a planning agent, analyzes the master plan with the `develop:split-plan` skill to organize tasks into phases and tracks, creates implementation plans, executes those plans, and tracks progress using the `tracker:tracker` agent.
+Automate a complete requirements-to-implementation workflow with a structured phase-based architecture. This command takes a requirements document, creates a master plan using a planning agent, analyzes the master plan with the `develop:split-plan` skill to organize tasks into phases and tracks, creates implementation plans, executes those plans, and tracks progress using the `tracker:tracker` agent.
 
-## Your Task
+## Task
 
 Process a requirements document through this 8-step workflow:
 1. **Parse arguments** and resolve requirements file path
@@ -43,7 +50,7 @@ Process a requirements document through this 8-step workflow:
 
 ## Phase Architecture
 
-The start command uses a **fixed, sequential phase structure** that represents a clean architecture approach:
+This command uses a **fixed, sequential phase structure** that represents a clean architecture approach:
 
 1. **Foundational Phase** - Abstract classes, toolings, utilities, base setup
 2. **Models Phase** - Entities, models, JSON classes, data structures

@@ -6,7 +6,11 @@ user-invocable: false
 
 # Estimate Task
 
-Use this skill to score task complexity using a 3-level scoring system. This helps with planning, estimation, and resource allocation.
+Score task complexity using a 3-level scoring system (1=Low, 2=Medium, 3=High). This helps with planning, estimation, and resource allocation.
+
+## Purpose
+
+Provide a reference guide for consistently scoring development task complexity to support sprint planning and effort estimation.
 
 ## Complexity Scoring System
 

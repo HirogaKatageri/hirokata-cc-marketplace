@@ -1,13 +1,13 @@
 ---
 name: add-track
-description: Add a new track to an existing tracker with metadata and status
+description: This skill should be used when the user asks to "add a track", "create a track", "add feature track", "add new track to tracker", or wants to add a feature-based grouping that spans across multiple phases.
 ---
 
 # Add Track Skill
 
-You are helping the user add a new track to an existing tracker. A track is a feature-based grouping that spans across multiple phases and contains related tasks.
+Add a new track to an existing tracker. A track is a feature-based grouping that spans across multiple phases and contains related tasks.
 
-## Your Task
+## Purpose
 
 Add a new track to an existing tracker, updating the Tracks section and preparing the structure for future tasks.
 

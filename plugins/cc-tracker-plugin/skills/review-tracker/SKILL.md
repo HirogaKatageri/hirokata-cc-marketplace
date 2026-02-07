@@ -1,13 +1,13 @@
 ---
 name: review-tracker
-description: Review tracker progress, generate reports, and show task status summaries
+description: This skill should be used when the user asks to "review tracker", "show tracker progress", "generate tracker report", "show task status", "tracker summary", "check progress", "show tracker stats", or wants to analyze tracker progress, identify blockers, and view completion status.
 ---
 
 # Review Tracker Skill
 
-You are helping the user review tracker progress and generate status reports. This skill analyzes the tracker, calculates statistics, identifies bottlenecks, and provides actionable insights.
+Review tracker progress and generate status reports. This skill analyzes the tracker, calculates statistics, identifies bottlenecks, and provides actionable insights.
 
-## Your Task
+## Purpose
 
 Read the tracker, analyze progress, and present a comprehensive report with completion status, pending tasks, blockers, and recommendations.
 

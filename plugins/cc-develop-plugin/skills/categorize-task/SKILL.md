@@ -6,7 +6,11 @@ user-invocable: false
 
 # Categorize Task
 
-Use this skill to classify development tasks into the 7-phase clean architecture structure. This helps organize work into the correct architectural layer.
+Classify development tasks into the 7-phase clean architecture structure. This helps organize work into the correct architectural layer.
+
+## Purpose
+
+Provide a reference guide for determining which architectural phase (Foundational → Models → Services → Data → Rules → State Management → UI) a development task belongs to.
 
 ## The 7 Phases
 

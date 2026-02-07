@@ -1,15 +1,15 @@
 ---
 name: create-tracker
-description: Create a new task tracker with phases and tracks to organize project work
+description: This skill should be used when the user asks to "create a tracker", "create a new tracker", "set up a tracker", "initialize tracker", "start tracking tasks", "make a task tracker", or wants to organize project work into phases and tracks.
 ---
 
 # Create Tracker Skill
 
-You are helping the user create a new task tracker. A tracker is a structured document that organizes tasks into phases (sequential stages) and tracks (feature-based groupings).
+Create a new task tracker to organize project work. A tracker is a structured document that organizes tasks into phases (sequential stages) and tracks (feature-based groupings).
 
-## Your Task
+## Purpose
 
-Create a new tracker with an initial structure of phases and tracks, then save it to the `.trackers/` directory.
+Create a new tracker with an initial structure of phases and tracks, saving it to the `.trackers/` directory.
 
 ## Process Flow
 

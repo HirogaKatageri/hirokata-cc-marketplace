@@ -1,13 +1,13 @@
 ---
 name: edit-tracker
-description: Edit tracker metadata including name and description (not task/phase/track status)
+description: This skill should be used when the user asks to "edit tracker", "update tracker name", "modify tracker", "rename tracker", "change tracker description", or wants to edit tracker-level metadata (not task/phase/track details or statuses).
 ---
 
 # Edit Tracker Skill
 
-You are helping the user edit tracker-level metadata. This skill is for modifying tracker name and description, not for updating task, phase, or track details or statuses.
+Edit tracker-level metadata. This skill is for modifying tracker name and description, not for updating task, phase, or track details or statuses.
 
-## Your Task
+## Purpose
 
 Update tracker name or description in the frontmatter and header sections.
 

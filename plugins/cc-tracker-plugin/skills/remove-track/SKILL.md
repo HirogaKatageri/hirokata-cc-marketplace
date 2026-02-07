@@ -1,13 +1,13 @@
 ---
 name: remove-track
-description: Remove a track and all its tasks from an existing tracker
+description: This skill should be used when the user asks to "remove track", "delete track", "remove feature track", "delete track and tasks", or wants to permanently delete a track and all associated tasks across all phases.
 ---
 
 # Remove Track Skill
 
-You are helping the user remove a track from an existing tracker. Removing a track will delete all tasks within that track across all phases.
+Remove a track from an existing tracker. Removing a track will delete all tasks within that track across all phases.
 
-## Your Task
+## Purpose
 
 Remove a track from the tracker, including all associated tasks across all phases, and update the structure accordingly.
 

@@ -1,13 +1,13 @@
 ---
 name: edit-track
-description: Edit track details including name, description, owner, and phase coverage (not status)
+description: This skill should be used when the user asks to "edit track", "update track details", "modify track", "rename track", "change track owner", "update track description", "change phase coverage", or wants to edit track metadata (excluding status changes, use mark-status for that).
 ---
 
 # Edit Track Skill
 
-You are helping the user edit an existing track's details. This skill is for modifying track metadata, not status (use `/mark-status` for status-only changes).
+Edit an existing track's details. This skill is for modifying track metadata, not status (use `/mark-status` for status-only changes).
 
-## Your Task
+## Purpose
 
 Update track name, description, owner, or phase coverage while preserving tasks and structure.
 

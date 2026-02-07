@@ -1,13 +1,13 @@
 ---
 name: edit-phase
-description: Edit phase details including name, description, and metadata (not status)
+description: This skill should be used when the user asks to "edit phase", "update phase details", "modify phase", "rename phase", "change phase name", "update phase description", or wants to edit phase metadata (excluding status changes, use mark-status for that).
 ---
 
 # Edit Phase Skill
 
-You are helping the user edit an existing phase's details. This skill is for modifying phase metadata, not status (use `/mark-status` for status-only changes).
+Edit an existing phase's details. This skill is for modifying phase metadata, not status (use `/mark-status` for status-only changes).
 
-## Your Task
+## Purpose
 
 Update phase name, description, or other metadata while preserving tasks and structure.
 

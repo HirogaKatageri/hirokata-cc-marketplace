@@ -10,9 +10,9 @@ Generate properly formatted conventional commits by analyzing changes, grouping 
 
 ## Purpose
 
-This skill automates the process of reviewing code changes, identifying logical groupings, and generating conventional commit messages. It ensures commits follow the Conventional Commits specification while giving users control over commit granularity (separate small commits, combined medium commits, or a single large commit).
+Automate the process of reviewing code changes, identifying logical groupings, and generating conventional commit messages. Ensure commits follow the Conventional Commits specification while providing control over commit granularity (separate small commits, combined medium commits, or a single large commit).
 
-## When to Use This Skill
+## When to Use
 
 Use this skill when:
 - Creating commits that follow Conventional Commits specification
@@ -109,9 +109,9 @@ Present the analysis showing:
 3. Conventional commit type for each group
 4. Brief description of what each group accomplishes
 
-### Step 3: Ask User for Commit Strategy
+### Step 3: Ask for Commit Strategy
 
-Use AskUserQuestion to let the user choose their commit granularity:
+Use AskUserQuestion to let the user choose commit granularity:
 
 ```
 Question: "How would you like to structure these commits?"
@@ -190,7 +190,7 @@ and clarify dependency requirements for Node.js 18+.
 
 ### Step 5: Stage and Commit Changes
 
-After presenting the commit messages to the user:
+After presenting commit messages:
 
 1. **Show commit plan**: Display all proposed commits with files and messages
 2. **Stage files**: Use `git add` for specific files in each group
@@ -251,12 +251,12 @@ All changes committed successfully.
 ## Edge Cases
 
 **No changes to commit:**
-- Inform user there are no changes
+- Inform that there are no changes
 - Do not create empty commits
 
 **Merge conflicts:**
 - Identify conflicted files from git status
-- Advise user to resolve conflicts before committing
+- Advise resolving conflicts before committing
 - Do not attempt to commit with unresolved conflicts
 
 **Pre-commit hook failures:**
@@ -267,8 +267,8 @@ All changes committed successfully.
 
 **Mixed staged/unstaged changes:**
 - Clearly identify what is staged vs unstaged
-- Ask user if they want to include unstaged changes
-- Only commit what user confirms
+- Ask if unstaged changes should be included
+- Only commit confirmed changes
 
 **Very large changesets (>20 files):**
 - Suggest more granular grouping

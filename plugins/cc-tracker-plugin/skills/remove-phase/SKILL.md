@@ -1,13 +1,13 @@
 ---
 name: remove-phase
-description: Remove a phase and all its tracks and tasks from an existing tracker
+description: This skill should be used when the user asks to "remove phase", "delete phase", "remove a phase from tracker", "delete stage", or wants to permanently delete a phase and all associated tracks and tasks, with automatic renumbering of subsequent phases.
 ---
 
 # Remove Phase Skill
 
-You are helping the user remove a phase from an existing tracker. Removing a phase will delete all tracks and tasks within that phase, and renumber subsequent phases.
+Remove a phase from an existing tracker. Removing a phase will delete all tracks and tasks within that phase, and renumber subsequent phases.
 
-## Your Task
+## Purpose
 
 Remove a phase from the tracker, including all associated tracks and tasks, and update the structure accordingly.
 

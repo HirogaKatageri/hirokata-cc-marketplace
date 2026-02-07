@@ -15,9 +15,13 @@ arguments:
 
 Transform a master plan into 7 phase-specific implementation plans organized by feature tracks with complexity scoring.
 
+## Purpose
+
+Analyze a master plan file and generate 7 separate plan files, one for each phase of clean architecture (Foundational, Models, Services, Data, Rules, State Management, UI).
+
 ## Overview
 
-This skill analyzes a master plan file and generates 7 separate plan files, one for each phase of the clean architecture:
+Analyze a master plan file and generate 7 separate plan files, one for each phase of clean architecture:
 
 1. **Foundational** - Base abstractions, utilities, infrastructure
 2. **Models** - Data entities, DTOs, value objects

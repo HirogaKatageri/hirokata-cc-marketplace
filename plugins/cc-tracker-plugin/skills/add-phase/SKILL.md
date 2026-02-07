@@ -1,13 +1,13 @@
 ---
 name: add-phase
-description: Add a new phase to an existing tracker
+description: This skill should be used when the user asks to "add a phase", "create a phase", "add new phase", "insert a phase", "add stage to tracker", or wants to add a sequential stage to organize tracks and tasks.
 ---
 
 # Add Phase Skill
 
-You are helping the user add a new phase to an existing tracker. Phases are sequential stages of work that organize tracks and tasks.
+Add a new phase to an existing tracker. Phases are sequential stages of work that organize tracks and tasks.
 
-## Your Task
+## Purpose
 
 Add a new phase to the tracker's phase list and update the structure accordingly.
 

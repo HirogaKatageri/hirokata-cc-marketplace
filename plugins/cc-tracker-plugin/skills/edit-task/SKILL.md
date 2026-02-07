@@ -1,13 +1,13 @@
 ---
 name: edit-task
-description: Edit task details including title, priority, complexity, and acceptance criteria (not status)
+description: This skill should be used when the user asks to "edit task", "update task details", "modify task", "change task priority", "update task title", "edit acceptance criteria", "change task complexity", or wants to edit task metadata (excluding status changes, use mark-status for that).
 ---
 
 # Edit Task Skill
 
-You are helping the user edit an existing task's details. This skill is for modifying task metadata, not status (use `/mark-status` for status-only changes).
+Edit an existing task's details. This skill is for modifying task metadata, not status (use `/mark-status` for status-only changes).
 
-## Your Task
+## Purpose
 
 Update task title, description, priority, complexity, acceptance criteria, dependencies, or other metadata while preserving structure.
 

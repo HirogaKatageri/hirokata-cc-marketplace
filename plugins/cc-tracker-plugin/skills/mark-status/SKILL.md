@@ -1,13 +1,13 @@
 ---
 name: mark-status
-description: Quick status update for phases, tracks, or tasks without editing other details
+description: This skill should be used when the user asks to "mark status", "update status", "mark task as complete", "mark as done", "change status", "update task status", "mark as in progress", or wants to quickly update the status of a phase, track, or task without editing other metadata.
 ---
 
 # Mark Status Skill
 
-You are helping the user quickly update the status of a phase, track, or task. This skill is optimized for status-only changes when no other edits are needed.
+Quickly update the status of a phase, track, or task. This skill is optimized for status-only changes when no other edits are needed.
 
-## Your Task
+## Purpose
 
 Update the status field of a phase, track, or task with minimal interaction, preserving all other details.
 

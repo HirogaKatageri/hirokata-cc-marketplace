@@ -1,13 +1,13 @@
 ---
 name: remove-task
-description: Remove a single task from an existing tracker
+description: This skill should be used when the user asks to "remove task", "delete task", "remove a task from tracker", "delete work item", or wants to permanently delete a single task and optionally its plan file.
 ---
 
 # Remove Task Skill
 
-You are helping the user remove a task from an existing tracker. Removing a task will delete the task and optionally its plan file.
+Remove a task from an existing tracker. Removing a task will delete the task and optionally its plan file.
 
-## Your Task
+## Purpose
 
 Remove a single task from the tracker and update statistics accordingly.
 
