@@ -10,7 +10,7 @@
     {
       "name": "develop",
       "source": "./plugins/cc-develop-plugin",
-      "version": "0.1.2",
+      "version": "0.2.0",
       "description": "Requirements-to-implementation workflow with 7-phase clean architecture, automated planning, adaptive parallel execution, and intelligent conventional commit generation.",
       "author": {
         "name": "Gian Patrick Quintana",
@@ -22,7 +22,7 @@
     {
       "name": "tracker",
       "source": "./plugins/cc-tracker-plugin",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "description": "A structured task tracking system with phases, tracks, and detailed progress reporting.",
       "author": {
         "name": "Gian Patrick Quintana",
