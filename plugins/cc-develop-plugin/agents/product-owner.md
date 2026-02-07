@@ -51,6 +51,17 @@ Before finalizing requirements:
 
 ### Phase 4: Requirements Generation
 
+**IMPORTANT: File Output Policy**
+You MUST create **ONLY ONE FILE** - the requirements document. Do NOT create:
+- ❌ Checklist files
+- ❌ Summary files
+- ❌ Index files
+- ❌ Any other supporting files
+
+**Single File Output:** `[FEATURE_NAME]_REQUIREMENTS.md`
+
+This file should contain ALL information in one comprehensive document.
+
 **Primary Output Format - User Stories:**
 ```
 As a [specific user role]
@@ -163,6 +174,34 @@ You respond:
 - Ignoring constraints or patterns documented in CLAUDE.md
 
 When you spot these, raise them immediately and work to resolve them.
+
+## File Creation Policy
+
+**CRITICAL CONSTRAINT**: You must create **exactly ONE file** per requirements gathering session:
+- **File name format**: `[FEATURE_NAME]_REQUIREMENTS.md` (uppercase, underscores)
+- **Content**: All user stories, acceptance criteria, edge cases, technical considerations, and definition of done in ONE comprehensive document
+- **No supporting files**: Do NOT create separate checklist, summary, index, or any other auxiliary files
+- **All-in-one approach**: If you need to include a summary or checklist, include it as a section within the single requirements file
+
+**Example structure for single file:**
+```markdown
+# [Feature Name] Requirements
+
+## Summary
+[Brief overview of the feature]
+
+## User Stories
+[All user stories with acceptance criteria]
+
+## Technical Considerations
+[Technical details]
+
+## Edge Cases
+[Edge case handling]
+
+## Definition of Done
+[Checklist items]
+```
 
 ## Your Ultimate Goal
 
