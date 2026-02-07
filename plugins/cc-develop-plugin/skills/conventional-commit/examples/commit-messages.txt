@@ -1,0 +1,302 @@
+# Conventional Commit Message Examples
+
+## Simple Feature (No Body)
+feat(ui): add dark mode toggle
+
+## Feature with Detailed Body
+feat(api): add user profile export functionality
+
+Allow users to export their profile data in JSON and CSV
+formats. Implements GDPR data portability requirements.
+
+- Add /api/users/:id/export endpoint
+- Support JSON and CSV output formats
+- Include all user data and related entities
+- Add rate limiting (1 export per hour)
+
+Closes #456
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Bug Fix
+fix(parser): prevent crash on malformed JSON input
+
+Add validation to check for null bytes and invalid UTF-8
+sequences before parsing. Previously, these would cause
+uncaught exceptions.
+
+Fixes #234
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Critical Bug Fix
+fix(critical): patch SQL injection vulnerability in search
+
+SECURITY: Sanitize user input in search queries to prevent
+SQL injection attacks. All user-provided search terms are
+now properly escaped.
+
+CVE-2024-XXXX
+Fixes #999
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Performance Improvement
+perf(database): optimize user lookup queries
+
+Reduce database queries from 3 to 1 per request by using
+JOIN operations instead of sequential queries.
+
+Performance improvements:
+- Average response time: 250ms → 45ms
+- 95th percentile: 800ms → 120ms
+- Database load: -60%
+
+Related to #567
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Refactoring
+refactor(auth): extract token validation to separate module
+
+Move token validation logic from AuthService to new
+TokenValidator class for better separation of concerns
+and testability. No behavior changes.
+
+- Create TokenValidator class
+- Update AuthService to use TokenValidator
+- Update tests to match new structure
+- Maintain 100% backward compatibility
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Breaking Change (with !)
+feat(api)!: redesign authentication endpoints
+
+BREAKING CHANGE: Authentication flow redesigned to use
+OAuth 2.0 instead of custom token system.
+
+Migration required:
+- Replace POST /auth/login with POST /oauth/token
+- Replace GET /auth/user with GET /api/v2/users/me
+- Update client libraries to use OAuth 2.0 flow
+
+Migration guide: docs/migration/oauth.md
+Support for old endpoints until: 2024-12-31
+
+Closes #789
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Breaking Change (in footer)
+feat(api): update user endpoints to v2
+
+BREAKING CHANGE: User API endpoints moved from /api/v1/users
+to /api/v2/users with updated response format.
+
+Changes:
+- New endpoint: GET /api/v2/users/:id
+- Response now includes 'metadata' field
+- Deprecated fields removed: 'legacy_id', 'old_status'
+
+Old endpoints remain available until 2024-12-31.
+Migration guide: docs/api-v2-migration.md
+
+Closes #345
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Documentation
+docs(api): add comprehensive API reference guide
+
+Create detailed documentation for all API endpoints
+including request/response examples, error codes, and
+rate limiting information.
+
+- Document all 45 API endpoints
+- Add request/response examples
+- Include authentication requirements
+- Add rate limiting details
+- Include error code reference
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Tests
+test(auth): add authentication edge case coverage
+
+Add test cases for edge cases and error scenarios that
+were previously not covered.
+
+Test coverage improvements:
+- Test invalid token formats
+- Test expired token handling
+- Test concurrent login attempts
+- Test token refresh race conditions
+- Overall coverage: 87% → 96%
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Build/Dependencies
+build(deps): update production dependencies
+
+Update dependencies to address security vulnerabilities
+and improve performance.
+
+Security updates:
+- express: 4.17.1 → 4.18.2 (CVE-2024-XXXX)
+- jsonwebtoken: 8.5.1 → 9.0.0 (CVE-2024-YYYY)
+
+Feature updates:
+- mongoose: 6.0.0 → 6.8.0
+- dotenv: 10.0.0 → 16.0.3
+
+All updates tested in staging environment.
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## CI/CD Configuration
+ci(github): add automated security scanning workflow
+
+Add Dependabot and CodeQL to automatically detect
+dependency vulnerabilities and code security issues.
+
+- Configure Dependabot for daily dependency checks
+- Add CodeQL for JavaScript and TypeScript analysis
+- Set up Slack notifications for security findings
+- Run security scans on all PRs
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Style/Formatting
+style(codebase): apply prettier formatting
+
+Apply consistent code formatting across entire codebase
+using prettier. No functional changes.
+
+- Configure prettier with project standards
+- Format all TypeScript and JavaScript files
+- Format all JSON and YAML files
+- Update pre-commit hook to enforce formatting
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Chore/Maintenance
+chore(scripts): add database seeding script
+
+Add utility script to seed development database with
+test data for easier local development.
+
+- Create seed script with sample users
+- Add configurable data generation options
+- Include reset functionality
+- Add documentation for usage
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Revert
+revert: feat(api): add rate limiting to all endpoints
+
+This reverts commit abc123def456.
+
+Rate limiting caused performance issues in production.
+Will revisit with different implementation approach.
+
+Related to #678
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Multiple Related Commits (Feature Track)
+
+### Commit 1: Implementation
+feat(notifications): add email notification system
+
+Implement email notification system using SendGrid for
+transactional emails.
+
+- Add email template engine
+- Integrate SendGrid API
+- Create notification queue with Redis
+- Implement retry logic for failed sends
+- Add email preference management
+
+Closes #890
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+### Commit 2: Tests
+test(notifications): add email notification test suite
+
+Add comprehensive test coverage for notification system.
+
+- Mock SendGrid API for unit tests
+- Add integration tests with test email service
+- Test email template rendering
+- Test queue and retry logic
+- Achieve 94% code coverage
+
+Related to #890
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+### Commit 3: Documentation
+docs(notifications): document email notification system
+
+Add documentation for email notification configuration
+and usage.
+
+- Document SendGrid setup and configuration
+- Add email template development guide
+- Include notification preference API docs
+- Add troubleshooting section
+
+Related to #890
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Combined Medium Commit
+
+feat(profile): add user profile management
+
+Implement complete user profile feature with editing
+and avatar upload capabilities.
+
+Implementation:
+- Add profile edit form with validation
+- Implement avatar upload with image processing
+- Add profile visibility settings
+- Create profile API endpoints
+
+Tests:
+- Add unit tests for profile validation
+- Add integration tests for profile API
+- Add E2E tests for profile editing flow
+- Test coverage: 92%
+
+Documentation:
+- Update API documentation
+- Add profile feature guide
+
+Closes #234, #235, #236
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+
+## Large Single Commit (Prototype)
+
+feat(dashboard): add analytics dashboard prototype
+
+Implement complete analytics dashboard as initial prototype
+for stakeholder review.
+
+Features:
+- Real-time metrics display
+- Customizable widget system
+- Data visualization with charts
+- Export to PDF/CSV
+- Responsive design
+
+Note: This is a prototype for review. Production
+implementation will be split into separate commits.
+
+Related to #567
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>

@@ -123,7 +123,7 @@ Complete requirements-to-implementation workflow with 7-phase architecture.
 
 ## Skills
 
-The plugin includes internal skills used by agents (not directly invokable by users):
+The plugin includes skills for development workflow support:
 
 ### `develop:split-plan`
 
@@ -134,6 +134,8 @@ Analyzes a master plan file and splits it into 7 phase-specific implementation p
 - Classifies tasks by phase
 - Scores task complexity (1-3)
 - Generates detailed phase plan files following clean architecture principles
+
+**Used by:** development-planner agent during plan analysis
 
 ### `develop:estimate-task`
 
@@ -166,6 +168,39 @@ Reference guide for classifying development tasks into the 7-phase clean archite
 - **Phase 7 (UI)**: Screens, components, views, user interface
 
 **Used by:** development-planner agent during task organization
+
+### `develop:conventional-commit` *(NEW in 0.1.2)*
+
+Generates properly formatted conventional commits by analyzing changes, grouping related modifications, and creating semantic commit messages.
+
+**Responsibilities:**
+- Analyze staged and unstaged changes
+- Group related changes logically (by purpose, type, scope)
+- Ask user for commit strategy (separate/combined/single)
+- Generate conventional commit messages following specification
+- Stage and commit changes with proper formatting
+- Handle edge cases (pre-commit hooks, conflicts, large changesets)
+
+**Trigger Phrases:**
+- "create a conventional commit"
+- "generate conventional commits"
+- "commit with conventional format"
+- "group my changes for commits"
+- "make a conventional commit message"
+
+**Features:**
+- Interactive commit grouping with user choice
+- Follows Conventional Commits specification
+- Includes validation scripts and grouping utilities
+- Comprehensive reference documentation and examples
+- Supports breaking changes, issue references, co-authors
+
+**Supporting Resources:**
+- `references/conventional-commits-spec.md` - Full specification
+- `references/commit-patterns.md` - Patterns and anti-patterns
+- `examples/multi-commit-workflow.sh` - Working examples
+- `scripts/validate-commit-msg.sh` - Message validator
+- `scripts/group-changes.py` - Change grouping analyzer
 
 ## Agents
 
@@ -444,7 +479,18 @@ cc-develop-plugin/
 ├── skills/
 │   ├── split-plan/              # Split master plan into phases
 │   ├── estimate-task/           # Task estimation
-│   └── categorize-task/         # Task categorization
+│   ├── categorize-task/         # Task categorization
+│   └── conventional-commit/     # Conventional commit generator (NEW in 0.1.2)
+│       ├── SKILL.md
+│       ├── references/
+│       │   ├── conventional-commits-spec.md
+│       │   └── commit-patterns.md
+│       ├── examples/
+│       │   ├── multi-commit-workflow.sh
+│       │   └── commit-messages.txt
+│       └── scripts/
+│           ├── validate-commit-msg.sh
+│           └── group-changes.py
 ├── .gitignore
 ├── LICENSE                      # MIT License
 └── README.md                   # This file
@@ -477,6 +523,21 @@ For issues, questions, or feature requests:
 3. Include relevant error messages or logs
 
 ## Changelog
+
+### 0.1.2
+- **New Skill: conventional-commit** - Intelligent conventional commit message generator
+  - Analyzes git changes and groups related modifications
+  - Interactive commit strategy selection (separate/combined/single)
+  - Generates properly formatted conventional commit messages
+  - Follows Conventional Commits specification
+  - Includes validation scripts and change grouping utilities
+  - Comprehensive reference documentation with patterns and examples
+  - Handles edge cases: pre-commit hooks, conflicts, large changesets
+  - Supports breaking changes, issue references, and co-authors
+- Production-quality supporting tools:
+  - `validate-commit-msg.sh` - Commit message format validator
+  - `group-changes.py` - Intelligent change grouping analyzer
+  - Complete reference docs and working examples
 
 ### 0.1.1
 - **New Agent: product-owner** - Expert requirements engineering agent for translating ideas into structured user stories

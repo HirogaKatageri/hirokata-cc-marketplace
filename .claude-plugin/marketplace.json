@@ -10,14 +10,14 @@
     {
       "name": "develop",
       "source": "./plugins/cc-develop-plugin",
-      "version": "0.1.1",
-      "description": "Requirements-to-implementation workflow with 7-phase clean architecture, automated planning, and adaptive parallel execution.",
+      "version": "0.1.2",
+      "description": "Requirements-to-implementation workflow with 7-phase clean architecture, automated planning, adaptive parallel execution, and intelligent conventional commit generation.",
       "author": {
         "name": "Gian Patrick Quintana",
         "email": "gian.quintana@hirokata.dev"
       },
       "license": "MIT",
-      "keywords": ["development", "requirements", "automation", "clean-architecture", "planning"]
+      "keywords": ["development", "requirements", "automation", "clean-architecture", "planning", "conventional-commits"]
     },
     {
       "name": "tracker",
