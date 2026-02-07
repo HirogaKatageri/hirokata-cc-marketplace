@@ -28,18 +28,19 @@ A comprehensive project and task management system with intelligent agents and s
 
 [View Documentation →](plugins/cc-tracker-plugin/README.md)
 
-### 2. Develop Plugin (v0.2.0)
+### 2. Develop Plugin (v0.2.2)
 
-Automated requirements-to-implementation workflow using a 7-phase clean architecture approach with intelligent commit generation.
+Automated requirements-to-implementation workflow using a 7-phase clean architecture approach with intelligent commit generation and dedicated software architecture planning.
 
 **Features:**
 - Converts requirements documents into working code
 - 7-phase clean architecture (Foundational → Models → Services → Data → Rules → State Management → UI)
 - Adaptive parallelism (1-8 developer agents based on task complexity)
-- **NEW: Conventional commit generator** with intelligent change grouping
+- **NEW in 0.2.2: Software architect agent** for comprehensive master plan creation
+- Conventional commit generator with intelligent change grouping
 - Resume capability for interrupted workflows
 - Integrates with tracker system for real-time progress
-- Product owner, phase architect, and senior developer agents
+- Specialized agents: software architect, product owner, development planner, and senior developer
 
 **Use Cases:**
 - Transforming requirements into implementation plans
