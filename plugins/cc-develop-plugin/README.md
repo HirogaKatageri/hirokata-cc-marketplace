@@ -202,6 +202,42 @@ Generates properly formatted conventional commits by analyzing changes, grouping
 - `scripts/validate-commit-msg.sh` - Message validator
 - `scripts/group-changes.py` - Change grouping analyzer
 
+### `develop:generate-requirements` *(NEW in 0.2.0)*
+
+Transforms feature ideas into structured requirements documents using the product-owner agent.
+
+**Responsibilities:**
+- Launch product-owner agent for requirements discovery
+- Conduct clarifying questions with user
+- Generate comprehensive requirements documentation
+- Output single requirements file in `requirements/[FEATURE_NAME]_REQUIREMENTS.md`
+- Ensure all user stories, acceptance criteria, edge cases, and technical considerations are included
+
+**Trigger Phrases:**
+- "generate requirements"
+- "create requirements"
+- "write requirements"
+- "define requirements"
+- "document requirements"
+- "requirements for feature"
+
+**Features:**
+- Single file output (no auxiliary files)
+- Comprehensive requirements template
+- User story patterns and best practices
+- Example requirements for reference
+- Integration with product-owner agent
+
+**File Output:**
+- **Location**: `requirements/` directory
+- **Naming**: `[FEATURE_NAME]_REQUIREMENTS.md` (uppercase with underscores)
+- **Format**: Single markdown file with all sections
+
+**Supporting Resources:**
+- `references/requirements-template.md` - Complete template structure
+- `references/user-story-patterns.md` - User story formats and examples
+- `examples/BIOMETRIC_SIGNIN_REQUIREMENTS.md` - Complete requirements example
+
 ## Agents
 
 ### `develop:product-owner`
@@ -480,17 +516,24 @@ cc-develop-plugin/
 │   ├── split-plan/              # Split master plan into phases
 │   ├── estimate-task/           # Task estimation
 │   ├── categorize-task/         # Task categorization
-│   └── conventional-commit/     # Conventional commit generator (NEW in 0.1.2)
+│   ├── conventional-commit/     # Conventional commit generator (NEW in 0.1.2)
+│   │   ├── SKILL.md
+│   │   ├── references/
+│   │   │   ├── conventional-commits-spec.md
+│   │   │   └── commit-patterns.md
+│   │   ├── examples/
+│   │   │   ├── multi-commit-workflow.sh
+│   │   │   └── commit-messages.txt
+│   │   └── scripts/
+│   │       ├── validate-commit-msg.sh
+│   │       └── group-changes.py
+│   └── generate-requirements/   # Requirements generator (NEW in 0.2.0)
 │       ├── SKILL.md
 │       ├── references/
-│       │   ├── conventional-commits-spec.md
-│       │   └── commit-patterns.md
-│       ├── examples/
-│       │   ├── multi-commit-workflow.sh
-│       │   └── commit-messages.txt
-│       └── scripts/
-│           ├── validate-commit-msg.sh
-│           └── group-changes.py
+│       │   ├── requirements-template.md
+│       │   └── user-story-patterns.md
+│       └── examples/
+│           └── BIOMETRIC_SIGNIN_REQUIREMENTS.md
 ├── .gitignore
 ├── LICENSE                      # MIT License
 └── README.md                   # This file
@@ -523,6 +566,25 @@ For issues, questions, or feature requests:
 3. Include relevant error messages or logs
 
 ## Changelog
+
+### 0.2.1
+- **New Skill: generate-requirements** - Comprehensive requirements documentation generator
+  - Launches product-owner agent for structured requirements gathering
+  - Single file output: `requirements/[FEATURE_NAME]_REQUIREMENTS.md` (no auxiliary files)
+  - Complete requirements template with all standard sections
+  - User story patterns and acceptance criteria best practices
+  - Full biometric authentication requirements example for reference
+  - Comprehensive references for requirements engineering
+- **Enhanced product-owner agent** - Strict single-file output policy
+  - Now creates only ONE requirements file (eliminated checklists, summaries, indices)
+  - Added File Output Policy and File Creation Policy sections
+  - Consolidated all content into single comprehensive document
+
+### 0.2.0
+- **Enhanced Documentation** - Critical concepts and purpose sections added across all skills
+  - Improved command frontmatter with workflow clarity
+  - All skills updated with action-oriented, active voice descriptions
+  - Better user guidance and documentation consistency
 
 ### 0.1.2
 - **New Skill: conventional-commit** - Intelligent conventional commit message generator

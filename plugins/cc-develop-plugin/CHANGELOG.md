@@ -5,6 +5,29 @@ All notable changes to the Develop Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-02-07
+
+### Added
+- **generate-requirements skill** - Comprehensive requirements documentation generator
+  - Launches product-owner agent for structured requirements gathering
+  - Single file output: `requirements/[FEATURE_NAME]_REQUIREMENTS.md`
+  - Complete requirements template with all sections
+  - User story patterns and best practices
+  - Full biometric authentication requirements example
+  - References for requirements engineering and user story writing
+
+### Changed
+- **product-owner agent** - Enhanced with strict file output policy
+  - Now creates only ONE requirements file (no auxiliary files)
+  - Added File Output Policy section with explicit constraints
+  - Added File Creation Policy section as critical constraint
+  - Consolidated all content (summaries, checklists) into single file
+
+### Improved
+- Product-owner agent output consistency
+- Requirements documentation workflow
+- Single-file requirements approach eliminates clutter
+
 ## [0.2.0] - 2026-02-07
 
 ### Added
