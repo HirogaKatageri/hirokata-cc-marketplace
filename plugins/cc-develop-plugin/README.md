@@ -90,7 +90,7 @@ Complete requirements-to-implementation workflow with 7-phase architecture.
 **Workflow:**
 
 1. **Parse arguments** and resolve requirements file path
-2. **Plan Agent** creates comprehensive master plan from requirements
+2. **develop:software-architect Agent** creates comprehensive master plan from requirements
 3. **User Reviews** and approves the master plan
 4. **develop:development-planner Agent** analyzes master plan using `develop:split-plan` skill and organizes tasks into:
    - 7 sequential phases (Foundational → Models → Services → Data → Rules → State Management → UI)
@@ -240,6 +240,31 @@ Transforms feature ideas into structured requirements documents using the produc
 
 ## Agents
 
+### `develop:software-architect` *(NEW in 0.2.2)*
+
+Analyzes requirements and creates comprehensive master implementation plans.
+
+**Responsibilities:**
+- Analyze requirements documents to understand scope, constraints, and success criteria
+- Investigate existing codebase to understand current architecture and patterns
+- Design comprehensive implementation strategies
+- Create single, well-structured master plan documents
+- Write plans directly to `.trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md`
+
+**Color:** Red
+
+**Model:** Sonnet (comprehensive analysis and planning)
+
+**Tools:** Read, Grep, Glob, Write, Bash
+
+**Triggers:**
+- Called by `/develop:develop-project` command in Step 2 for master plan creation
+- Can be invoked manually to analyze requirements and create implementation plans
+
+**Output:**
+- Single master plan markdown file with comprehensive implementation roadmap
+- Structured with phases, technical specifications, and architectural decisions
+
 ### `develop:product-owner`
 
 Transforms ambiguous ideas into well-structured requirements, user stories, and clear project scope.
@@ -388,7 +413,7 @@ BASE_PARALLEL = floor(10.0 / AVG_COMPLEXITY)
 /develop:develop-project requirements/my-app.md
 
 # The plugin will:
-# - Create master plan using Plan agent
+# - Create master plan using develop:software-architect agent
 # - Wait for your review and approval
 # - Analyze with develop:development-planner agent using develop:split-plan skill
 # - Show you the phase/track structure
@@ -449,7 +474,7 @@ BASE_PARALLEL = floor(10.0 / AVG_COMPLEXITY)
 
 - **Claude Code**: Latest version
 - **Tracker System**: Plugin integrates with tracker commands (create-tracker, add-task, mark-status, review-tracker)
-- **Plan Agent**: Claude Code's built-in Plan agent for master plan creation
+- **Software Architect Agent**: develop:software-architect agent for master plan creation (included in plugin)
 - **Requirements Format**: Markdown files with clear feature descriptions
 
 ## Best Practices
@@ -507,6 +532,7 @@ cc-develop-plugin/
 ├── .claude-plugin/
 │   └── plugin.json              # Plugin manifest
 ├── agents/
+│   ├── software-architect.md    # Software architect agent (NEW in 0.2.2)
 │   ├── product-owner.md         # Product owner agent (NEW in 0.1.1)
 │   ├── development-planner.md   # Development planner agent
 │   └── senior-developer.md      # Senior developer agent
@@ -566,6 +592,17 @@ For issues, questions, or feature requests:
 3. Include relevant error messages or logs
 
 ## Changelog
+
+### 0.2.2
+- **New Agent: software-architect** - Dedicated agent for master plan creation
+  - Analyzes requirements documents to understand scope and constraints
+  - Investigates existing codebase to understand architecture and patterns
+  - Designs comprehensive implementation strategies
+  - Creates well-structured master plan documents with Write capabilities
+  - Streamlines workflow by writing plans directly without returning content
+- **Enhanced develop-project command** - Step 2 now uses software-architect agent
+  - Better separation of concerns: software-architect for planning, development-planner for organization
+  - Improved workflow efficiency with direct plan file creation
 
 ### 0.2.1
 - **New Skill: generate-requirements** - Comprehensive requirements documentation generator

@@ -5,6 +5,28 @@ All notable changes to the Develop Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-02-08
+
+### Added
+- **software-architect agent** - New dedicated agent for master plan creation
+  - Analyzes requirements documents to understand scope and constraints
+  - Investigates existing codebase to understand architecture and patterns
+  - Designs comprehensive implementation strategies
+  - Creates single, well-structured master plan documents
+  - Has Write capabilities to save plans directly without returning content
+
+### Changed
+- **develop-project command** - Updated Step 2 to use software-architect agent
+  - Uses `develop:software-architect` subagent_type
+  - Agent writes master plan directly to `.trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md`
+  - Streamlined workflow proceeds directly to Step 3 after plan creation
+  - No need to return plan content to main agent
+
+### Improved
+- Master plan creation workflow efficiency
+- Separation of concerns: software-architect for planning, development-planner for organization
+- Documentation clarity about agent roles and responsibilities
+
 ## [0.2.1] - 2026-02-07
 
 ### Added

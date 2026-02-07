@@ -40,7 +40,7 @@ Automate a complete requirements-to-implementation workflow with a structured ph
 
 Process a requirements document through this 8-step workflow:
 1. **Parse arguments** and resolve requirements file path
-2. **Plan agent** creates a comprehensive master plan
+2. **software-architect agent** creates a comprehensive master plan
 3. **User reviews** and approves the master plan
 4. **develop:development-planner agent** analyzes master plan using `develop:split-plan` skill and organizes tasks into **predefined phases** (Foundational → Models → Services → Data → Rules → State Management → UI) and **feature-based tracks** (authentication, profile, products, etc.)
 5. **tracker:tracker agent** creates and populates tracker from phase plans
@@ -79,7 +79,7 @@ Create these tasks at the start of execution:
 
 2. **Task 2**: "Generate master plan from requirements"
    - subject: "Generate master plan from requirements"
-   - description: "Spawn Plan agent to analyze requirements and create comprehensive master implementation plan"
+   - description: "Spawn software-architect agent to analyze requirements and create comprehensive master implementation plan"
    - activeForm: "Generating master plan from requirements"
 
 3. **Task 3**: "Review master plan with user"
@@ -232,7 +232,7 @@ This gives users real-time visibility into workflow progress.
 
 **Before starting**: Use **TaskUpdate** to set Task 2 status to `in_progress`
 
-**CRITICAL**: Use a planning agent to analyze requirements and create a comprehensive master plan, then write it directly to a file.
+**CRITICAL**: Use the software-architect agent to analyze requirements and create a comprehensive master plan. The agent has Write capabilities and will save the plan directly.
 
 1. Read the input file from `RESOLVED_FILE_PATH` (the file path resolved in Step 1)
 
@@ -251,21 +251,24 @@ This gives users real-time visibility into workflow progress.
    mkdir -p .trackers/{BASE_NAME}/plans
    ```
 
-4. **Spawn a Plan agent to create implementation strategy**:
+4. **Spawn the software-architect agent to create implementation strategy**:
 
    ```
    <Task tool call>
-     subagent_type: "Plan"
+     subagent_type: "develop:software-architect"
      description: "Create master implementation plan"
      prompt: "Analyze the requirements document and create a comprehensive master implementation plan.
 
      ## Requirements File
      Read and analyze: {RESOLVED_FILE_PATH}
 
+     ## Output File Path
+     Save the master plan to: .trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md
+
      ## Your Task
      Create a detailed master plan that:
 
-     1. **Analyzes all requirements** and extracts:
+     1. **Analyzes all requirements** from {RESOLVED_FILE_PATH} and extracts:
         - Feature descriptions
         - User stories
         - Acceptance criteria
@@ -291,34 +294,30 @@ This gives users real-time visibility into workflow progress.
         - Show clear progression from foundation to UI
         - Highlight critical paths and dependencies
 
-     **CRITICAL**: Return the COMPLETE master plan content in your response as a well-structured markdown document. DO NOT save the file yourself (you don't have Write access).
+     **CRITICAL**: Use the Write tool to save the master plan directly to:
+     `.trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md`
 
-     Format your response as a comprehensive master plan ready to be saved to:
-     `.trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md`"
+     Create one comprehensive master plan document following the structure defined in your system prompt."
    </Task>
    ```
 
-5. Wait for the Plan agent to complete and return the master plan content
+5. Wait for the software-architect agent to complete. The agent will:
+   - Read and analyze the requirements document
+   - Explore the codebase to understand existing patterns
+   - Create a comprehensive master plan
+   - Write the plan directly to `.trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md`
 
-6. **Extract the master plan content** from the Plan agent's response
-
-7. **Write the master plan to file directly**:
-   - Use the Write tool to save the master plan content to:
-     `.trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md`
-
-8. Inform user:
+6. After the agent completes, proceed directly to Step 3. Inform user:
    ```
-   Master plan created and saved!
+   Master plan created and saved by software-architect agent!
 
    **File**: .trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md
    **Source Requirements**: {RESOLVED_FILE_PATH}
 
-   The master plan analyzes your requirements and provides a comprehensive implementation strategy.
+   The software-architect agent has analyzed your requirements and created a comprehensive implementation strategy.
    ```
 
 **After completing Step 2**: Use **TaskUpdate** to set Task 2 status to `completed`
-
-9. Continue to Step 3
 
 ### Step 3: Review Master Plan
 
@@ -371,7 +370,7 @@ This gives users real-time visibility into workflow progress.
      * Ask: "Master plan updated. Would you like to proceed with split-plan workflow?"
      * Wait for response (proceed)
 
-4. Once user confirms "proceed", continue to Step 4
+Once user confirms "proceed", continue to Step 4.
 
 **After completing Step 3**: Use **TaskUpdate** to set Task 3 status to `completed`
 
@@ -497,7 +496,7 @@ This gives users real-time visibility into workflow progress.
 
 **After completing Step 4**: Use **TaskUpdate** to set Task 4 status to `completed`
 
-6. Once user confirms "proceed", continue to Step 5
+Once user confirms "proceed", continue to Step 5.
 
 ### Step 5: Create Tracker and Populate from Phase Plans
 
@@ -593,8 +592,6 @@ This gives users real-time visibility into workflow progress.
    ```
 
 **After completing Step 5**: Use **TaskUpdate** to set Task 5 status to `completed`
-
-6. Continue to Step 6
 
 **IMPORTANT**: This step uses ONLY tracker agent skills to build the tracker structure. The tracker agent handles all data persistence and validation.
 
@@ -1017,8 +1014,9 @@ After all implementations complete (or when user chooses to pause):
 
 - **Progress Tracking**: Creates 8 workflow tasks at start for real-time visibility
 - **Task Status Updates**: Each step marks its task as in_progress (start) and completed (end)
-- **Master Plan First**: Planning agent creates comprehensive master plan from requirements
+- **Master Plan First**: develop:software-architect agent creates comprehensive master plan from requirements
 - **Master Plan Review**: User reviews and approves master plan before split-plan workflow
+- **Software-Architect Agent**: Step 2 uses develop:software-architect agent with Write capabilities to analyze requirements and create master plan directly
 - **Development Planner Agent**: Step 4 uses develop:development-planner agent to analyze master plan and create phase plans
 - **Split Plan Analysis**: develop:development-planner agent uses develop:split-plan skill to organize master plan into 7 phases
 - **Separate Tracker Creation**: Step 5 creates tracker and populates it from phase plans using ONLY tracker skills
@@ -1037,7 +1035,7 @@ After all implementations complete (or when user chooses to pause):
 - **Adaptive Parallel**: Within each phase, 1-8 agents run in parallel based on complexity
 - **Resume Support**: Can resume from any incomplete phase using tracker status
 - **File Naming**: Uses `{BASE_NAME}-{NN}-{name}.md` format (zero-padded, 01-07)
-- **Workflow Steps**: Plan → Review → Development Planner Agent → Tracker Creation → Senior Developers
+- **Workflow Steps**: develop:software-architect → Review → develop:development-planner → Tracker Creation → develop:senior-developer agents
 - **Senior Developer Agent**: All implementation tasks use the develop:senior-developer agent
 
 ## Agent Selection
@@ -1063,8 +1061,8 @@ Keep the user informed at each step:
 **Step 2: Master Plan Creation**
 - Mark Task 2 as in_progress
 - "Processing requirements file: {BASE_NAME}"
-- "Spawning Plan agent to create master plan..."
-- "Master plan created and saved!"
+- "Spawning develop:software-architect agent to create master plan..."
+- "Master plan created and saved by develop:software-architect agent!"
 - "File: .trackers/{BASE_NAME}/plans/{BASE_NAME}-master-plan.md"
 - Mark Task 2 as completed
 
